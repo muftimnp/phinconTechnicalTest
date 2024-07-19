@@ -18,7 +18,7 @@ describe('example to-do app', () => {
     cy.visit(config.URL_PHINCON)
   })
 
-  it('verify displays default', () => {
+  it('TC1 verify displays default', () => {
     cy.xpath('//*[text()="Silahkan masukkan Nama Aplikasi"]').should('have.text', 'Silahkan masukkan Nama Aplikasi');
     cy.xpath('//div[@class="o3Dpx"]/div[1]//input[@class="whsOnd zHQkBf"]').should('exist');
     cy.xpath('//span[.="Silahkan pilih jenis Pengguna Aplikasi"]').should('have.text', 'Silahkan pilih jenis Pengguna Aplikasi');
@@ -26,47 +26,54 @@ describe('example to-do app', () => {
     cy.xpath('//*[text()="Korporasi"]').should('have.text', 'Korporasi');
     cy.xpath('//*[text()="Bearapa jumlah pengguna Aplikasi"]').should('have.text', 'Bearapa jumlah pengguna Aplikasi');
     cy.xpath('//*[text()="Kapan Aplikasi didirikan"]').should('have.text', 'Kapan Aplikasi didirikan');
+    cy.screenshot('TC1')
   })
   
-  it('Masukkan inputan yang valid dengan tipe individu', () => {
+  it('TC2 Masukkan inputan yang valid dengan tipe individu', () => {
     cy.xpath('//div[@class="o3Dpx"]/div[1]//input[@class="whsOnd zHQkBf"]').type('PT MUFTI BERJAYA');
     cy.xpath('//*[text()="Individu"]').click();
     cy.xpath('//div[@class="o3Dpx"]/div[3]//input[@class="whsOnd zHQkBf"]').type('12345678');
     cy.xpath('//input[@type="date"]').type('1997-11-07');
+    cy.screenshot('isian form valid')
     cy.xpath('//*[text()="Kirim"]').click();
     cy.xpath('//*[text()="Jawaban Anda telah direkam."]').should('exist');
+    cy.screenshot('TC2')
   })
   
-  it('Masukkan inputan yang valid dengan tipe Korporasi', () => {
+  it('TC3 Masukkan inputan yang valid dengan tipe Korporasi', () => {
     cy.xpath('//div[@class="o3Dpx"]/div[1]//input[@class="whsOnd zHQkBf"]').type('PT MUFTI BERJAYA');
     cy.xpath('//*[text()="Korporasi"]').click();
     cy.xpath('//div[@class="o3Dpx"]/div[3]//input[@class="whsOnd zHQkBf"]').type('12345678');
     cy.xpath('//input[@type="date"]').type('1997-11-07');
     cy.xpath('//*[text()="Kirim"]').click();
     cy.xpath('//*[text()="Jawaban Anda telah direkam."]').should('exist');
+    cy.screenshot('TC3')
   })
 
-  it('Submit form tanpa mengisi value pada field yang tersedia', () => {
+  it('TC4 Submit form tanpa mengisi value pada field yang tersedia', () => {
     cy.xpath('//*[text()="Kirim"]').click();
     cy.xpath('//*[text()="Jawaban Anda telah direkam."]').should('not.exist'); //harusnya tidak berhasil submit
+    cy.screenshot('TC4')
   })
   
-  it('Submit form pada field jumlah pengguna aplikasi selain format number ', () => {
+  it('TC5 Submit form pada field jumlah pengguna aplikasi selain format number ', () => {
     cy.xpath('//div[@class="o3Dpx"]/div[1]//input[@class="whsOnd zHQkBf"]').type('PT MUFTI BERJAYA');
     cy.xpath('//*[text()="Korporasi"]').click();
     cy.xpath('//div[@class="o3Dpx"]/div[3]//input[@class="whsOnd zHQkBf"]').type('ABCDEFGHI');
     cy.xpath('//input[@type="date"]').type('1997-11-07');
     cy.xpath('//*[text()="Kirim"]').click();
     cy.xpath('//*[text()="Jawaban Anda telah direkam."]').should('not.exist'); //harusnya tidak berhasil submit
+    cy.screenshot('TC5')
   })
   
-  it('Submit form menggunakan invalid tipe tanggal', () => {
+  it('TC6 Submit form menggunakan invalid tipe tanggal', () => {
     cy.xpath('//div[@class="o3Dpx"]/div[1]//input[@class="whsOnd zHQkBf"]').type('PT MUFTI BERJAYA');
     cy.xpath('//*[text()="Korporasi"]').click();
     cy.xpath('//div[@class="o3Dpx"]/div[3]//input[@class="whsOnd zHQkBf"]').type('ABCDEFGHI');
     cy.xpath('//input[@type="date"]').type('abcdef');
     cy.xpath('//*[text()="Kirim"]').click();
     cy.xpath('//*[text()="Jawaban Anda telah direkam."]').should('not.exist'); //harusnya tidak berhasil submit
+    cy.screenshot('TC6')
   })
 
 
