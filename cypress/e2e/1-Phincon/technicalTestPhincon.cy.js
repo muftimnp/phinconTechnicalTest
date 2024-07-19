@@ -13,7 +13,7 @@
 require('cypress-xpath');
 const config = require('../../fixtures/config');
 
-describe('example to-do app', () => {
+describe('technical test using google form', () => {
   beforeEach(() => {
     cy.visit(config.URL_PHINCON)
   })
@@ -56,7 +56,7 @@ describe('example to-do app', () => {
     cy.screenshot('TC4')
   })
   
-  it('TC5 Submit form pada field jumlah pengguna aplikasi selain format number ', () => {
+  it('TC5 gagal submit form pada field jumlah pengguna aplikasi selain format number ', () => {
     cy.xpath('//div[@class="o3Dpx"]/div[1]//input[@class="whsOnd zHQkBf"]').type('PT MUFTI BERJAYA');
     cy.xpath('//*[text()="Korporasi"]').click();
     cy.xpath('//div[@class="o3Dpx"]/div[3]//input[@class="whsOnd zHQkBf"]').type('ABCDEFGHI');
@@ -66,7 +66,7 @@ describe('example to-do app', () => {
     cy.screenshot('TC5')
   })
   
-  it('TC6 Submit form menggunakan invalid tipe tanggal', () => {
+  it('TC6 gagal submit form menggunakan invalid tipe tanggal', () => {
     cy.xpath('//div[@class="o3Dpx"]/div[1]//input[@class="whsOnd zHQkBf"]').type('PT MUFTI BERJAYA');
     cy.xpath('//*[text()="Korporasi"]').click();
     cy.xpath('//div[@class="o3Dpx"]/div[3]//input[@class="whsOnd zHQkBf"]').type('ABCDEFGHI');
@@ -74,6 +74,16 @@ describe('example to-do app', () => {
     cy.xpath('//*[text()="Kirim"]').click();
     cy.xpath('//*[text()="Jawaban Anda telah direkam."]').should('not.exist'); //harusnya tidak berhasil submit
     cy.screenshot('TC6')
+  })
+  
+  it('TC7 gagal submit form menggunakan tanggal dihari selanjutnya', () => {
+    cy.xpath('//div[@class="o3Dpx"]/div[1]//input[@class="whsOnd zHQkBf"]').type('PT MUFTI BERJAYA');
+    cy.xpath('//*[text()="Korporasi"]').click();
+    cy.xpath('//div[@class="o3Dpx"]/div[3]//input[@class="whsOnd zHQkBf"]').type('ABCDEFGHI');
+    cy.xpath('//input[@type="date"]').type('1997-11-08');
+    cy.xpath('//*[text()="Kirim"]').click();
+    cy.xpath('//*[text()="Jawaban Anda telah direkam."]').should('not.exist'); //harusnya tidak berhasil submit
+    cy.screenshot('TC7')
   })
 
 
