@@ -8,6 +8,7 @@ To build the application you need to have Cypress
 
 ## 3. Downloads or Run in your terminal
 npm install
+
 npx cypress run --spec cypress/e2e/1-Phincon/technicalTestPhincon.cy.j
 
 ## 4. For access cloud in cypress with invitation link
